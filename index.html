@@ -23,7 +23,7 @@ scripts:
   <ol class="l--grid -g:20" role="list">
     {%- for post in site.posts %}
     <li class="c--partyCard" data-tags="{{ post.tags | join: '|' }}">
-      <a class="c--partyCard_link is--boxLink has--transition -p -bd -bdrs:30 -bgc -bxsh -hov:-bdc" style="--p:var(--s25) var(--s30) var(--s30);--bgc:var(--card-bg);--bxsh:var(--bxsh--card);--hov-bdc:var(--brand)" href="{{ post.url | relative_url }}">
+      <a class="c--partyCard_link is--boxLink -p -bd -bdrs:30 -bgc -bxsh -hov:-bdc" style="--p:var(--s25) var(--s30) var(--s30);--bgc:var(--card-bg);--bxsh:var(--bxsh--card);--hov-bdc:var(--brand)" href="{{ post.url | relative_url }}">
         <p class="l--cluster -g:15 -c:text-2 -fz:s">
           <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
           {%- if post.result %}<span class="-d:inline-flex -ai:center -g:5 -c:text -fw:700">{% include icon.html name="trophy" %}{{ post.result }}</span>{% endif %}
