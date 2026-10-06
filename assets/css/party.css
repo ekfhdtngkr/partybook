@@ -1,0 +1,37 @@
+/* 파티 목록(홈)과 파티 글 화면 */
+@layer lism-custom {
+  /* Lism 속성 클래스(-bgc, -bd, -p, -g …)는 층 밖이라 속성을 직접 덮어쓸 수 없다 → 변수(--bgc, --bdc, --hov-* …)로 바꾼다 */
+
+  /* ── 팀 6마리 요약 (칸 수: 3칸, md 이상 6칸 — team-strip.html의 -cols_md) ── */
+  .c--teamStrip_box { --bgc: var(--card-bg); --hov-bdc: var(--brand); }
+  /* 타입 색 띠: 단일 타입은 한 색, 복합 타입은 반반 */
+  .c--teamStrip_types i { flex: 1; background: var(--type, var(--neutral)); }
+  .c--teamStrip_mega { vertical-align: 1px; }
+
+  /* 태그 줄: 늘어나도 한 줄 — 넘치면 옆으로 밀어서 보고, 오른쪽 끝을 흐리게 */
+  .c--tagRow {
+    overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - var(--s35)), transparent);
+    mask-image: linear-gradient(90deg, #000 calc(100% - var(--s35)), transparent);
+  }
+  .c--tagRow::-webkit-scrollbar { display: none; }
+  .c--tagRow > * { flex: none; }
+
+  /* ── 홈: 파티 목록 ── */
+  .c--partyCard[hidden] { display: none; }
+  .c--partyCard_link .c--teamStrip_box { --bdc: transparent; --bgc: var(--base-2); }
+  .c--partyCard .c--teamStrip { margin-top: var(--s20); }
+
+  /* ── 파티 글 ── */
+  .c--party_team .c--teamStrip_box { --bgc: var(--base-2); --bdc: transparent; }
+  .c--party_toc a { --hov-c: var(--text); color: var(--text-2); text-decoration: none; }
+  .c--party_toc a[aria-current] { --hov-c: var(--brand); color: var(--brand); font-weight: 700; } /* 지금 읽는 제목 (toc.js) */
+
+  /* 넓은 화면(lg): 목차를 오른쪽에 붙여 따라오게 (길면 상자 안에서 스크롤). 열·위치·높이는 party.html의 *_lg 클래스 */
+  @container (min-width: 1120px) {
+    .c--party_toc {
+      align-self: start; top: calc(var(--header-h) + var(--s25)); overflow-y: auto; overscroll-behavior: contain;
+      scrollbar-width: thin; scrollbar-color: var(--divider) transparent;
+    }
+  }
+}

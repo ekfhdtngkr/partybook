@@ -1,0 +1,11 @@
+<header class="c--siteHeader -pos:sticky -t:0 -h -bgc -bd-b" style="--h:var(--header-h);--bgc:color-mix(in srgb, var(--page-bg) 85%, transparent)">
+  <div class="is--wrapper -contentSize:l -px:20 -h:100%"><div class="l--flex -jc:between -ai:center -g:20 -h:100%">
+    <a class="-c:text -fw:800 -fz:m -td:none" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <div class="c--themeToggle -d:inline-flex -p:5 -bd -bdrs:99 -bgc:base" role="group" aria-label="{{ site.data.ui.theme.label }}">
+      {%- assign choices = "light:sun,dark:moon,system:monitor" | split: "," %}
+      {%- for pair in choices %}{% assign c = pair | split: ":" %}
+      <button type="button" data-theme-choice="{{ c[0] }}" aria-pressed="false" title="{{ site.data.ui.theme[c[0]] }}">{% assign icon_name = c[1] %}{% include icon.html name=icon_name %}<span class="u--srOnly">{{ site.data.ui.theme[c[0]] }}</span></button>
+      {%- endfor %}
+    </div>
+  </div></div>
+</header>

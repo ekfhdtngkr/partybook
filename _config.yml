@@ -1,0 +1,36 @@
+# ─── 사이트 정보 ─────────────────────────────────────────
+title: "Partybook"
+description: "VGC 파티를 기록하고 공유하는 노트"
+author: "" # 글쓴이 이름 (비우면 표시 안 함)
+lang: ko
+timezone: Asia/Seoul
+url: ""     # 배포 주소. GitHub Actions가 Pages 설정값으로 채움
+baseurl: "" # GitHub Actions가 --baseurl로 덮어씀
+
+# ─── 샘플 카드 ───────────────────────────────────────────
+showdown:
+  stat_labels: habcds       # habcds(H A B C D S) | ko(HP 공 방 특공 특방 스핏)
+
+# ─── 빌드 ────────────────────────────────────────────────
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+defaults:
+  - scope:
+      type: posts
+    values:
+      layout: party
+      permalink: /parties/:year/:month/:day/:title/
+
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - vendor

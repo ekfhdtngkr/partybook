@@ -1,0 +1,27 @@
+# 화면 문구 — 다른 언어로 바꾸려면 이 파일만 고치면 된다.
+nav:
+  tags: 태그
+home:
+  empty: 아직 파티 글이 없습니다. _posts/ 에 글을 추가하세요.
+  all: 전체
+party:
+  team: 배틀팀
+  copy_team: 페이스트 복사
+  toc: 목차
+  source: 원문
+  team_id: 팀 ID
+  pokepaste: 팀 텍스트 보기
+copy:
+  button: 복사
+  done: 복사했습니다
+  failed: 복사하지 못했습니다
+  show_source: 원문 보기
+showdown:
+  forme_toggle: 메가 ⇄ 기본
+theme:
+  label: 화면 모드
+  light: 라이트
+  dark: 다크
+  system: 시스템
+footer:
+  made_with: Partybook · Jekyll

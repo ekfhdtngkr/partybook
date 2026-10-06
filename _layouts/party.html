@@ -1,0 +1,64 @@
+---
+layout: default
+scripts:
+  - /assets/js/toc.js
+---
+{%- comment -%}
+  파티 글: 머리말(제목·대회·성적·형식) → 팀 6마리 요약 + 팀 전체 복사 → 본문(샘플 카드 + 해설) + 목차
+  머리말 값: event · result · team_id(팀 ID) · pokepaste(링크) · source(원문 링크) · source_title
+{%- endcomment -%}
+{%- assign toc = content | toc_items %}
+<article class="c--party is--wrapper -contentSize:l -px:20 -pt:40"><div>
+  <header>
+    <p class="l--flex -ai:center -g:15 -c:text-2 -fz:s">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y.%m.%d" }}</time>
+    </p>
+    <h1 class="-mt:15 -fz:2xl -fz_md -fw:800 -lts:s" style="--fz_md:var(--fz--3xl)">{{ page.title }}</h1>
+    {%- if page.event or page.result %}
+    <p class="l--flex -fxw:wrap -g -mt:10 -c:text-2" style="--g:var(--s10) var(--s20)">
+      {%- if page.event %}<span>{{ page.event }}</span>{% endif %}
+      {%- if page.result %}<span class="-d:inline-flex -ai:center -g:5 -c:text -fw:700">{% include icon.html name="trophy" %}{{ page.result }}</span>{% endif %}
+    </p>
+    {%- endif %}
+    {%- if page.tags.size > 0 %}
+    <p class="c--tagRow l--flex -g:10 -mt:20 -pe:35">{% for tag in page.tags %}<a class="b--chip b--chip--sm -hov:-c -hov:-bdc" href="{{ '/' | relative_url }}?tag={{ tag | uri_escape }}">#{{ tag }}</a>{% endfor %}</p>
+    {%- endif %}
+  </header>
+
+  {%- if page.team %}
+  <section class="c--party_team -mt:35 -p:20 -p_sm -bd -bdrs:30 -bgc -bxsh" style="--p_sm:var(--s25);--bgc:var(--card-bg);--bxsh:var(--bxsh--card)" aria-labelledby="team-title">
+    <div class="l--cluster -jc:between -g:15 -mbe:20">
+      <h2 id="team-title" class="-fz:base -fw:800">{{ site.data.ui.party.team }}</h2>
+      <div class="l--cluster -g:10">
+        {%- if page.team_id %}
+        <button type="button" class="b--copyBtn -hov:-c -hov:-bdc" data-copy-text="{{ page.team_id | escape }}">{{ site.data.ui.party.team_id }} <code>{{ page.team_id }}</code></button>
+        {%- endif %}
+        {%- if page.pokepaste %}
+        <a class="b--copyBtn -hov:-c -hov:-bdc" href="{{ page.pokepaste }}" rel="noopener">{{ site.data.ui.party.pokepaste }}{% include icon.html name="external" %}</a>
+        {%- endif %}
+        <button type="button" class="b--copyBtn b--copyBtn--primary -hov:-c -hov:-bdc" data-copy-text="{{ page.team_source | escape }}">{% include icon.html name="copy" %}{{ site.data.ui.party.copy_team }}</button>
+      </div>
+    </div>
+    {% include team-strip.html team=page.team link=true %}
+  </section>
+  {%- endif %}
+
+  <div class="l--grid -gtc -g:35 -g_lg -gtc_lg -mt:40" style="--gtc:minmax(0, 1fr);--g_lg:var(--s35) var(--s45);--gtc_lg:minmax(0, 1fr) var(--s70)">
+    {%- if toc.size > 1 %}
+    <nav class="c--party_toc -p -bd -bdrs:30 -bgc -fz:s -gc_lg -gr_lg -pos_lg -max-h_lg" style="--p:var(--s20) var(--s25);--bgc:var(--card-bg);--gc_lg:2;--gr_lg:1;--pos_lg:sticky;--max-h_lg:calc(100dvh - var(--header-h) - var(--s40))" aria-labelledby="toc-title">
+      <p class="-mbe:10 -fw:800" id="toc-title">{{ site.data.ui.party.toc }}</p>
+      <ol class="l--grid -g:5">
+        {%- for item in toc %}
+        <li{% if item.level == 3 %} class="-ps:15"{% endif %}><a class="-hov:-c" href="#{{ item.id }}">{{ item.text }}</a></li>
+        {%- endfor %}
+      </ol>
+    </nav>
+    {%- endif %}
+    <div class="c--prose l--flow -gc_lg -gr_lg" style="--gc_lg:1;--gr_lg:1">
+      {%- if page.source %}
+      <p class="-c:text-2 -fz:s">{{ site.data.ui.party.source }}: <a href="{{ page.source }}" rel="noopener">{{ page.source_title | default: page.source }}</a></p>
+      {%- endif %}
+      {{ content | with_heading_ids }}
+    </div>
+  </div>
+</div></article>

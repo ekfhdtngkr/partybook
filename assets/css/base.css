@@ -1,0 +1,63 @@
+/* Partybook 기본 — 요소 기본값, 공통 부품, 머리글 (색 토큰은 tokens.css)
+ * Lism CSS(assets/vendor/lism-css) 위에 얹는다. 층: 요소 기본값 lism-base · 공통 부품(b--) lism-block · 그 밖(c--) lism-custom
+ * 크기·여백·색 같은 단일 속성은 HTML의 Lism 속성 클래스로 쓰고, 여기에는 상태·자손·가상 요소 규칙과 클래스로 못 쓰는 속성만 둔다.
+ * 길이는 Lism 토큰(--s*, --fz--*, --bdrs--*, --lh--*)만 쓴다. 예외: 1px 선, 초점 테두리. */
+@layer lism-base {
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + var(--s20)); }
+  body { background: var(--page-bg); line-height: var(--lh--l); word-break: keep-all; }
+  h1, h2, h3 { line-height: var(--lh--s); }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+}
+
+@layer lism-block {
+  /* 태그 버튼 (홈 거르기 · 글 머리 태그) — 마우스 올림은 HTML의 -hov:-c -hov:-bdc가 아래 --hov-* 값을 쓴다 */
+  .b--chip {
+    --hov-c: var(--text); --hov-bdc: var(--text-2);
+    display: inline-flex; align-items: center; height: var(--s35); padding: 0 var(--s15);
+    border: 1px solid var(--divider); border-radius: var(--bdrs--99); background: var(--base);
+    color: var(--text-2); font: inherit; font-size: var(--fz--s); font-weight: 600; text-decoration: none; cursor: pointer;
+  }
+  .b--chip[aria-pressed="true"] { --hov-c: var(--base); --hov-bdc: var(--text); background: var(--text); border-color: var(--text); color: var(--base); }
+  .b--chip.b--chip--sm { height: var(--s30); font-size: var(--fz--xs); }
+
+  /* 복사 버튼 */
+  .b--copyBtn {
+    --hov-c: var(--text); --hov-bdc: var(--text-2);
+    display: inline-flex; align-items: center; gap: var(--s10); height: var(--s35); padding: 0 var(--s15);
+    border: 1px solid var(--divider); border-radius: var(--bdrs--99); background: var(--base); color: var(--text-2);
+    font: inherit; font-size: var(--fz--xs); font-weight: 600; text-decoration: none; cursor: pointer;
+    user-select: none; -webkit-user-select: none;
+  }
+  .b--copyBtn code { color: var(--text); }
+  .b--copyBtn.b--copyBtn--primary { --hov-c: var(--on-brand); --hov-bdc: var(--brand); background: var(--brand); border-color: var(--brand); color: var(--on-brand); }
+  .b--copyBtn.b--copyBtn--primary:hover { filter: brightness(1.08); } /* 밝기 변화는 -hov 클래스가 없다 */
+  .b--copyBtn[data-copied="true"]::after { content: "✓"; }
+  .b--copyBtn[data-copied="false"] { --hov-c: var(--accent); --hov-bdc: var(--accent); color: var(--accent); border-color: var(--accent); }
+}
+
+@layer lism-custom {
+  .c--skipLink { left: var(--s15); top: calc(var(--s45) * -1); z-index: 50; }
+  .c--skipLink:focus { top: var(--s15); }
+
+  /* ── 머리글 ── */
+  .c--siteHeader { z-index: 20; backdrop-filter: blur(10px); }
+  .c--themeToggle button {
+    display: grid; place-items: center; width: var(--s35); height: var(--s35); padding: 0; border: 0; border-radius: var(--bdrs--99);
+    background: none; color: var(--text-2); font-size: var(--fz--m);
+  }
+  .c--themeToggle button[aria-pressed="true"] { background: var(--base-2); color: var(--text); }
+
+  /* 원문 복사 블록 (화면 표시 ≠ 복사 결과) */
+  .c--copyBlock_raw summary { width: fit-content; color: var(--text-2); font-size: var(--fz--xs); cursor: pointer; }
+
+  /* 글 본문 */
+  .c--prose > :first-child { margin-top: 0; }
+  .c--prose > h2 { margin: var(--s50) 0 var(--s20); font-size: var(--fz--2xl); font-weight: 800; }
+  .c--prose > h3 { margin: var(--s40) 0 var(--s10); font-size: var(--fz--l); font-weight: 800; }
+  .c--prose :where(ul, ol):not([class]) { padding-inline-start: var(--s25); }
+  .c--prose :where(li) + :where(li) { margin-top: var(--s5); }
+  .c--prose blockquote { margin: var(--s30) 0; padding: var(--s5) 0 var(--s5) var(--s20); border-left: 3px solid var(--divider); color: var(--text-2); }
+  .c--prose code { padding: 1px var(--s5); border-radius: var(--bdrs--10); background: var(--base-2); font-size: var(--fz--s); }
+  .c--prose :where(h2, h3) { scroll-margin-top: calc(var(--header-h) + var(--s20)); }
+}

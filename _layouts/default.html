@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'ko' }}">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <a class="c--skipLink -pos:absolute -py:10 -px:15 -bdrs:20 -bgc:brand -c" style="--c:var(--on-brand)" href="#main">본문 바로가기</a>
+  {% include header.html %}
+  <main id="main" class="is--container">
+    {{ content }}
+  </main>
+  {% include footer.html %}
+  <p class="u--srOnly" data-live-region aria-live="polite"></p>
+  <script type="application/json" id="site-text">{{ site.data.ui | jsonify }}</script>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/copy.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/forme-toggle.js' | relative_url }}" defer></script>
+  {%- for script in layout.scripts %}
+  <script src="{{ script | relative_url }}" defer></script>
+  {%- endfor %}
+  {%- for script in page.scripts %}
+  <script src="{{ script | relative_url }}" defer></script>
+  {%- endfor %}
+</body>
+</html>

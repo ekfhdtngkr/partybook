@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true # Gemfile.lock
+      - id: pages
+        uses: actions/configure-pages@v6
+      - name: Build
+        # 배포 주소(url·baseurl)는 Pages 설정에서 받아 쓴다 (canonical·sitemap 주소가 절대 주소가 되게)
+        run: |
+          echo 'url: "${{ steps.pages.outputs.origin }}"' > _config.ci.yml
+          bundle exec jekyll build --config _config.yml,_config.ci.yml --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+      - uses: actions/upload-pages-artifact@v5
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

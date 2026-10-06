@@ -1,0 +1,26 @@
+/*
+ * 포켓몬 타입 색 — 배지·기술 점·팀 요약 띠에 쓴다. 색을 바꾸려면 --type(배경)·--type-fg(글자)를 고친다.
+ * 배경: 스칼렛·바이올렛 게임 타입 색 (ColorDex https://www.pokemonaaah.net/art/colordex/ 의 "GEN 9 — SCVI").
+ * 글자: 배경과 같은 색상(hue)의 먹색 또는 흰색 계열(OKLCH), WCAG 대비 4.5:1 이상.
+ *   예외: 불꽃·물·에스퍼·풀은 게임처럼 흰색 계열 글자(대비 3:1 이상).
+ */
+@layer lism-custom {
+  .sd-type--normal { --type: #9fa19f; --type-fg: oklch(24.0% 0.001 145.5); }
+  .sd-type--fire { --type: #e62829; --type-fg: oklch(97.5% 0.012 27.1); }
+  .sd-type--water { --type: #2980ef; --type-fg: oklch(97.5% 0.011 256.8); }
+  .sd-type--electric { --type: #fac000; --type-fg: oklch(24.0% 0.049 86.5); }
+  .sd-type--grass { --type: #3fa129; --type-fg: oklch(97.5% 0.025 140.4); }
+  .sd-type--ice { --type: #3dcef3; --type-fg: oklch(24.0% 0.043 219.2); }
+  .sd-type--fighting { --type: #ff8000; --type-fg: oklch(24.0% 0.060 53.0); }
+  .sd-type--poison { --type: #9141cb; --type-fg: oklch(97.5% 0.015 307.4); }
+  .sd-type--ground { --type: #915121; --type-fg: oklch(97.5% 0.014 54.1); }
+  .sd-type--flying { --type: #81b9ef; --type-fg: oklch(24.0% 0.034 248.3); }
+  .sd-type--psychic { --type: #ef4179; --type-fg: oklch(97.5% 0.012 6.3); }
+  .sd-type--bug { --type: #91a119; --type-fg: oklch(24.0% 0.052 116.8); }
+  .sd-type--rock { --type: #afa981; --type-fg: oklch(24.0% 0.019 100.5); }
+  .sd-type--ghost { --type: #704170; --type-fg: oklch(97.5% 0.014 327.0); }
+  .sd-type--dragon { --type: #5060e1; --type-fg: oklch(97.5% 0.011 272.9); }
+  .sd-type--dark { --type: #624d4e; --type-fg: oklch(97.5% 0.004 15.1); }
+  .sd-type--steel { --type: #60a1b8; --type-fg: oklch(24.0% 0.026 222.8); }
+  .sd-type--fairy { --type: #ef70ef; --type-fg: oklch(24.0% 0.060 327.5); }
+}

@@ -1,0 +1,49 @@
+/* 샘플 카드 (이미지 없음) — 타입 색은 pokemon-types.css, 크기·여백·색은 _includes/sample-card.html의 Lism 클래스 */
+@layer lism-custom {
+  /* 원문 복사 블록 안의 카드: 폭을 줄여 가운데, 복사 버튼은 아래 줄 오른쪽 */
+  .c--copyBlock[data-format="showdown"] { max-width: var(--sz--xs); margin-inline: auto; }
+  .c--copyBlock[data-format="showdown"] .c--copyBlock_view { padding: 0; }
+  .c--copyBlock[data-format="showdown"] .c--copyBlock_bar {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--s10) var(--s15); padding: var(--s10) var(--s5) 0;
+  }
+  .c--copyBlock[data-format="showdown"] .b--copyBtn { order: 2; margin-inline-start: auto; }
+  .c--copyBlock[data-format="showdown"] .c--copyBlock_raw { order: 1; }
+  .c--copyBlock[data-format="showdown"] .c--copyBlock_raw[open] { flex-basis: 100%; }
+
+  /* 왼쪽: 이름·타입·특성·기술 / 오른쪽: 능력치 세로 열(카드 높이 전체) */
+  .c--sdCard[data-forme="mega"] .c--sdCard_forme[data-forme="base"],
+  .c--sdCard[data-forme="base"] .c--sdCard_forme[data-forme="mega"] { display: none; }
+  .c--sdCard_forme { display: inline-flex; }
+  .c--sdCard > :not(.c--sdCard_stats) { grid-column: 1; min-width: 0; }
+
+  .c--sdCard_formeBtn { color: var(--text-2); font: inherit; } /* font: inherit — 줄 높이도 부모를 따른다 (Lism button 기본값과 다름) */
+
+  .sd-type {
+    display: inline-flex; align-items: center; height: var(--s30); padding: 0 var(--s10); border-radius: var(--bdrs--10);
+    background: var(--type, var(--neutral)); color: var(--type-fg, #fff);
+    font-size: var(--fz--xs); font-weight: 800; line-height: 1;
+  }
+
+  .c--sdCard_move { text-overflow: ellipsis; }
+
+  /* 능력치: 라벨 · 막대 · 값 */
+  .c--sdCard_stats { border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .c--sdCard_stats th, .c--sdCard_stats td { padding: 0; border: 0; background: none; vertical-align: middle; }
+  .c--sdCard_stats th { padding-left: var(--s15); color: var(--text-2); font-weight: 800; text-align: start; white-space: nowrap; }
+  .c--sdCard_stats td { padding-left: var(--s10); font-weight: 700; text-align: end; white-space: nowrap; }
+  .c--sdCard_stats td.c--sdCard_bar { width: 100%; }
+  .c--sdCard_stats td:last-child { min-width: calc(3ch + var(--s10)); } /* 값 칸 폭을 카드마다 같게 (252도 들어감) → 막대 길이를 카드끼리 비교 가능 */
+  .c--sdCard_bar span { display: block; height: var(--s10); border-radius: var(--bdrs--10); background: color-mix(in srgb, var(--text-2) 16%, transparent); overflow: hidden; }
+  .c--sdCard_bar i { display: block; height: 100%; border-radius: var(--bdrs--10); background: var(--text-2); }
+  .c--sdCard_stats td.c--sdCard_zero { color: var(--text-2); font-weight: 500; opacity: 0.6; }
+  .c--sdCard_stats [data-mod="plus"] th { color: #e5484d; }
+  .c--sdCard_stats [data-mod="plus"] .c--sdCard_bar i { background: #e5484d; }
+  .c--sdCard_stats [data-mod="minus"] th { color: #3e7bfa; }
+  :root[data-theme="dark"] .c--sdCard_stats [data-mod="plus"] th { color: #ff7a7e; }
+  :root[data-theme="dark"] .c--sdCard_stats [data-mod="minus"] th { color: #7aa5ff; }
+
+  /* sm 이상: 능력치 열 왼쪽 여백을 넓힌다 (열 간격은 sample-card.html의 -cg_sm) */
+  @container (min-width: 480px) {
+    .c--sdCard_stats th { padding-left: var(--s20); }
+  }
+}

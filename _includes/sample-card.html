@@ -1,0 +1,42 @@
+{%- comment -%}
+  샘플 카드 (이미지 없음). card는 lib/showdown/resolver.rb가 만든다.
+  처음에는 기본 폼을 보여주고, 메가 샘플은 버튼으로 메가 폼과 전환한다 (assets/js/forme-toggle.js).
+{%- endcomment -%}
+{%- assign card = include.card %}
+<div class="c--sdCard l--grid -gtc -gtr -cg:15 -cg_sm -p -bd -bdrs:30 -bgc -c:text" style="--gtc:minmax(0, 1fr) var(--s60);--gtr:auto auto auto 1fr;--cg_sm:var(--s20);--p:var(--s20) var(--s20) var(--s15);--bgc:var(--card-bg)" data-forme="base">
+  <div class="l--cluster -g" style="--g:var(--s5) var(--s10)">
+    <h3 class="-fz:m -fw:800">
+      {%- if card.mega %}<span class="c--sdCard_forme -g:5" data-forme="mega">{{ card.mega.name }}</span>{% endif -%}
+      <span class="c--sdCard_forme -g:5" data-forme="base">{{ card.base.name }}</span>
+    </h3>
+    {%- if card.mega %}
+    <button type="button" class="c--sdCard_formeBtn -ms:auto -h -p -bd -bdrs:99 -bgc:base -fz:xs -fw:700 -hov:-c -hov:-bdc" style="--h:var(--s30);--p:0 var(--s10);--hov-c:var(--text);--hov-bdc:var(--text-2)" data-forme-toggle aria-pressed="false">{{ site.data.ui.showdown.forme_toggle }}</button>
+    {%- endif %}
+  </div>
+  <div class="l--cluster -g -mt:10" style="--g:6px">
+    {%- if card.mega %}<span class="c--sdCard_forme -g:5" data-forme="mega">{% for t in card.mega.types %}<span class="sd-type sd-type--{{ t.id }}">{{ t.ko }}</span>{% endfor %}</span>{% endif -%}
+    <span class="c--sdCard_forme -g:5" data-forme="base">{% for t in card.base.types %}<span class="sd-type sd-type--{{ t.id }}">{{ t.ko }}</span>{% endfor %}</span>
+  </div>
+  <div class="l--cluster -g -mt:10" style="--g:6px">
+    <span class="-d:inline-flex -ai:center -h -px:10 -bd -bdrs:10 -fz:xs -lh:1" style="--h:var(--s30)">
+      {%- if card.mega %}<span class="c--sdCard_forme -g:5" data-forme="mega">{{ card.mega.ability }}</span>{% endif -%}
+      <span class="c--sdCard_forme -g:5" data-forme="base">{{ card.base.ability }}</span>
+    </span>
+    {%- if card.nature %}<span class="-d:inline-flex -ai:center -h -px:10 -bdrs:10 -bgc:base-2 -fz:xs -lh:1" style="--h:var(--s30)">{{ card.nature }}</span>{% endif %}
+    {%- if card.item %}<span class="-fz:xs -fw:bold">{{ card.item }}</span>{% endif %}
+  </div>
+  <ul class="l--grid -ac:start -g:5 -mt:15 -pt:15 -bd-t" role="list">
+    {%- for move in card.moves %}
+    <li class="c--sdCard_move l--flex -ai:center -g:10 -h -px:10 -ov:hidden -bd -bdrs:10 -bgc:base-2 -fz:xs -whs:nowrap" style="--h:var(--s30);--bdc:color-mix(in srgb, var(--divider) 60%, transparent)"><span class="sd-type--{{ move.type }} -fxsh:0 -w -h -bdrs:99 -bgc" style="--w:var(--s15);--h:var(--s15);--bgc:var(--type, var(--neutral))" title="{{ move.type_ko }}" aria-hidden="true"></span>{{ move.name }}</li>
+    {%- endfor %}
+  </ul>
+  {%- comment %} 능력치: 오른쪽 세로 열 — 라벨 · 막대(32칸 기준, resolver의 bar %) · 값 {% endcomment %}
+  <table class="c--sdCard_stats -gc -gr -w:100% -h:100% -bd-l -fz:xs" style="--gc:2;--gr:1 / -1">
+    <caption class="u--srOnly">{{ card.stats_kind }}</caption>
+    <tbody>
+      {%- for stat in card.stats %}
+      <tr{% if stat.mod %} data-mod="{{ stat.mod }}"{% endif %}><th scope="row">{{ stat.label }}</th><td class="c--sdCard_bar" aria-hidden="true"><span><i style="width: {{ stat.bar }}%"></i></span></td><td{% if stat.value == 0 %} class="c--sdCard_zero"{% endif %}>{{ stat.value }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,6 @@
+{
+  "source": "smogon/pokemon-showdown (MIT)",
+  "ko_commit": "3de1c70a62e63853fc84e084c7fac65fa9a34003",
+  "en_data": "https://play.pokemonshowdown.com/data/{pokedex,moves}.json",
+  "fetched_at": "2026-10-06T13:37:14Z"
+}

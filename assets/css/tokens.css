@@ -1,0 +1,42 @@
+/*
+ * Partybook 토큰 — Lism CSS의 토큰(--base, --text, --brand, --link, --ff--base …)을 덮어쓴다.
+ * Lism 규칙대로 lism-base 층에 두고 main.css 뒤에 읽어 Lism 기본값을 이긴다. 브랜드 색은 --brand 하나만 바꾸면 된다.
+ * Lism 자체에는 다크 모드 규칙이 없으므로 [data-theme="dark"]에서 직접 정의한다.
+ * 사이트 전용 토큰: --on-brand --card-bg --page-bg --bxsh--card(색이 들어가 있어 Lism 그림자 토큰 대신 씀) --header-h
+ */
+@layer lism-base {
+  :root {
+    color-scheme: light;
+    --brand: #3b5bdb;
+    --link: var(--brand);
+    --on-brand: #ffffff;
+    --accent: #e03131;
+    --base: #ffffff;
+    --base-2: #f3f4f7;
+    --card-bg: #ffffff;
+    --page-bg: #f6f7fa;
+    --text: #15171c;
+    --text-2: #5b6170;
+    --divider: #e3e5ea;
+    --neutral: #9aa0ab;
+    --bxsh--card: 0 1px 2px rgb(20 24 40 / 0.04), 0 4px 16px rgb(20 24 40 / 0.05);
+    --header-h: var(--s50);
+    --ff--base: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --brand: #8ea5ff;
+    --on-brand: #0d1020;
+    --accent: #ff8787;
+    --base: #171a21;
+    --base-2: #1f232c;
+    --card-bg: #191c24;
+    --page-bg: #111318;
+    --text: #eceef2;
+    --text-2: #a3a9b6;
+    --divider: #2c313c;
+    --neutral: #6b7280;
+    --bxsh--card: 0 1px 2px rgb(0 0 0 / 0.3);
+  }
+}

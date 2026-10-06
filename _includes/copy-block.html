@@ -1,0 +1,14 @@
+{%- comment -%}
+  화면 표시와 복사 결과가 다른 블록 — 복사 버튼과 드래그 복사 모두 [data-copy-src]의 원문을 넣는다 (assets/js/copy.js).
+  매개변수: format, source(복사될 원문), html(화면용 HTML), id(선택)
+{%- endcomment -%}
+<figure class="c--copyBlock -pos:relative -my:25" data-format="{{ include.format }}"{% if include.id %} id="{{ include.id }}"{% endif %}>
+  <div class="c--copyBlock_view">{{ include.html }}</div>
+  <div class="c--copyBlock_bar">
+    <button type="button" class="b--copyBtn -hov:-c -hov:-bdc" data-copy-block>{{ site.data.ui.copy.button }}</button>
+    <details class="c--copyBlock_raw">
+      <summary>{{ site.data.ui.copy.show_source }}</summary>
+      <pre data-copy-src class="-max-h -m -py:15 -px:20 -ov:auto -bd -bdrs:20 -bgc -ff:mono -fz:xs -lh:m" style="--max-h:var(--sz--xs);--m:var(--s15) 0 var(--s5);--bgc:var(--card-bg)">{{ include.source | escape }}</pre>
+    </details>
+  </div>
+</figure>

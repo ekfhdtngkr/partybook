@@ -1,0 +1,13 @@
+{%- comment -%} 파티 6마리 요약 — 이름·타입·도구. 누르면 그 샘플 카드로 이동. 매개변수: team, link(true면 앵커) {%- endcomment -%}
+{%- capture box %}class="c--teamStrip_box l--grid -ac:start -g:5 -h:100% -p -bd -bdrs:30 -bgc -c:text -td:none{% if include.link %} -hov:-bdc{% endif %}" style="--p:var(--s15) var(--s15) var(--s10)"{% endcapture -%}
+<ol class="c--teamStrip l--columns -cols_md -g:10" style="--cols:3;--cols_md:6" role="list">
+  {%- for member in include.team %}
+  <li>
+    {%- if include.link %}<a {{ box }} href="#{{ member.id }}">{% else %}<div {{ box }}>{% endif %}
+    <span class="c--teamStrip_types l--flex -h -mbe:10 -bdrs:10 -ov:hidden" style="--h:var(--s5)" aria-hidden="true">{% for t in member.types %}<i class="sd-type--{{ t.id }}"></i>{% endfor %}</span>
+    <span class="-d:block -fz:s -fw:800 -lh:s">{% if member.mega %}<span class="c--teamStrip_mega -d:inline-flex -ai:center -jc:center -w -h -me:5 -bdrs:99 -lh:1 -bgc:text -c:base -fz:2xs -fw:800" style="--w:var(--s20);--h:var(--s20)">M</span>{% endif %}{{ member.name }}</span>
+    {%- if member.item %}<span class="-c:text-2 -fz:xs -lh:m">{{ member.item }}</span>{% endif %}
+    {%- if include.link %}</a>{% else %}</div>{% endif %}
+  </li>
+  {%- endfor %}
+</ol>

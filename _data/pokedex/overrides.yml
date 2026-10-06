@@ -1,0 +1,41 @@
+# 한국어 이름 보완 — Showdown 데이터에 없거나 바꾸고 싶은 이름을 Showdown ID(소문자 영숫자)로 적는다.
+# 빌드 경고("한국어 이름 없음")에 나온 이름을 여기에 추가하면 된다.
+# species: 종 하나의 전체 이름 / formes: 폼 이름(Showdown의 forme 값) → "기본 이름(폼 이름)"으로 붙는다
+species:
+  # Showdown 한국어 데이터에 기본 이름이 비어 있는 종
+  toxtricity: 스트린더
+  urshifu: 우라오스
+  zygarde: 지가르데
+  alcremie: 마휘핑
+  dudunsparce: 노고고치
+  # 같은 forme 값이 종마다 다른 뜻인 폼 (예: Ice — 버드렉스는 백마, 아르세우스는 타입)
+  calyrexice: 버드렉스(백마 탄 모습)
+  calyrexshadow: 버드렉스(흑마 탄 모습)
+  necrozmaduskmane: 네크로즈마(황혼의 갈기)
+  necrozmadawnwings: 네크로즈마(새벽의 날개)
+  lycanrocmidnight: 루가루암(한밤중의 모습)
+  lycanrocdusk: 루가루암(황혼의 모습)
+  toxtricitylowkey: 스트린더(로우한 모습)
+  urshifurapidstrike: 우라오스(연격의 태세)
+  ogerponwellspring: 오거폰(우물의 가면)
+  ogerponhearthflame: 오거폰(화덕의 가면)
+  ogerponcornerstone: 오거폰(주춧돌의 가면)
+  floetteeternal: 플라엣테(영원의 꽃)
+  floettemega: 메가플라엣테
+formes:
+  Alola: 알로라의 모습
+  Galar: 가라르의 모습
+  Hisui: 히스이의 모습
+  Paldea: 팔데아의 모습
+  F: 암컷의 모습
+  M: 수컷의 모습
+  Therian: 영물폼
+  Origin: 오리진폼
+  Hero: 마이티폼
+  Roaming: 도보폼
+  10%: 10%폼
+  Complete: 퍼펙트폼
+items:
+  floettite: 플라엣테나이트
+abilities: {}
+moves: {}
